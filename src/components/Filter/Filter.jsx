@@ -1,12 +1,9 @@
+import css from './Filter.module.css';
+
 export const Filter = ({ filter, onChangeFilter }) => (
-    <label>
+    <label className={css.label}>
       Find contacts by name:
-      <input type="text" value={filter} onChange={(e) => onChangeFilter(e.target.value)} />
+      <input className={css.input} type="text" value={filter} onChange={(e) => onChangeFilter(e.target.value)} />
     </label>
   );
-  /*
-  Filter.propTypes = {
-    filter: PropTypes.string.isRequired,
-    onChangeFilter: PropTypes.func.isRequired,
-  };
-  */
+ 

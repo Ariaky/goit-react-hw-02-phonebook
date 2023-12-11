@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import css from './App.module.css';
 
 export class App extends Component {
   state = {
@@ -46,7 +47,10 @@ export class App extends Component {
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter((contact) => contact.name.toLowerCase().includes(normalizedFilter));
+    const filteredContacts = contacts.filter((contact) => contact.name.toLowerCase().includes(normalizedFilter));
+    const sortedContacts = filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
+
+    return sortedContacts;
   };
 
   render() {
@@ -54,11 +58,11 @@ export class App extends Component {
     const filteredContacts = this.getFilteredContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={css.wrapper}>
+        <h1 className={css.title}>Phonebook</h1>
         <ContactForm onAddContact={this.addContact} />
         
-        <h2>Contacts</h2>
+        <h2 className={css.title}>Contacts</h2>
         <Filter filter={filter} onChangeFilter={this.changeFilter} />
         <ContactList contacts={filteredContacts} onDeleteContact={this.deleteContact} />
       </div>
